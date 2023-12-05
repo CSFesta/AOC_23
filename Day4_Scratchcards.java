@@ -9,6 +9,12 @@ public class Day4_Scratchcards {
 
 	public static void main(String[] args) {
 		int total = 0;
+		int[] copias = new int[206];
+		for (int c = 0; c < copias.length; c++) {
+			copias[c] = 1;
+		}
+
+		int reps = 0;
 		try {
 			Scanner scanner = new Scanner(new File("C:\\Users\\Windows\\Desktop\\inputs_natal\\input4.txt"));
 			while (scanner.hasNextLine()) {
@@ -47,11 +53,12 @@ public class Day4_Scratchcards {
 						cont++;
 					}
 				}
-				if (cont != 1)
-					total += (int) (Math.pow(2, cont - 1));
-				else {
-					total++;
+				for (int j = reps + 1; j <= cont + reps && j < copias.length; j++) {
+					copias[j] += copias[reps];
 				}
+				total += copias[reps];
+				reps++;
+
 			}
 			scanner.close();
 		} catch (FileNotFoundException e) {
